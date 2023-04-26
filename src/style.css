@@ -1,0 +1,56 @@
+:root {
+    --darkBlue: #001f41;
+    --niceGrey: #eaeaea;
+    font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--darkBlue);
+    color: var(--niceGrey);
+    height: 15%;
+    padding: 0 10px;
+}
+
+#title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo {
+    height: 75px;
+    width: 75px;
+    text-align: center;
+    line-height: 75px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+header a {
+    font-size: larger;
+    font-weight: 200;
+    text-decoration: none;
+    color: var(--niceGrey);
+    padding: 20px;
+}
+
+main {
+    height: 80%;
+    background-color: var(--niceGrey);
+    margin: 0;
+}
+
+footer {
+    text-align: center;
+    background-color: var(--darkBlue);
+    color: var(--niceGrey);
+    height: 5%;
+}
