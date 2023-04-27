@@ -1,45 +1,46 @@
 import Render from './Render';
-import landing from '../pages/landing.js';
 import SessionManager from './SessionManager';
+import landing from '../pages/landing.js';
+import progress from '../pages/progress';
+import login from '../pages/login';
 
 class Handler {
     constructor() {
         // init objects
-        this.render = new Render();
         this.session = new SessionManager();
     
         // render landing page
-        this.render.render(landing());
+        Render.render(login());
 
         // listen to the header links
         document.getElementById("home-link").addEventListener("click", () => {
-            this.session.status() ? this.render.render(dashboard()) : this.render.render(landing());
+            this.session.status() ? Render.render(dashboard()) : Render.render(landing());
         });
 
         document.getElementById("about-link").addEventListener("click", () => {
-            this.render.render(progress());
+            Render.render(progress());
         });
 
         document.getElementById("features-link").addEventListener("click", () => {
-            this.render.render(progress());
+            Render.render(progress());
         });
 
         document.getElementById("help-link").addEventListener("click", () => {
-            this.render.render(progress());
+            Render.render(progress());
         });
 
         document.getElementById("about-link").addEventListener("click", () => {
-            this.render.render(progress());
+            Render.render(progress());
         });
 
         document.getElementById("sign-in-out").addEventListener("click", () => {
             if (this.session.status()) {
                 this.session.logOut();
-                this.render.render(landing());
+                Render.render(landing());
             } else {
-                this.render.render(login());
+                Render.render(login());
             }
-        })
+        });
     }
 }
 
