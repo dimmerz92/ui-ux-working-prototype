@@ -16,6 +16,7 @@ function login() {
 
     // form
     const form = document.createElement("form");
+    form.onsubmit = function() {return false};
     form.innerHTML = `
         <label for="username" class="hidden">Username:</label>
         <input type="text" name="username" id="username" placeholder="Username">
@@ -38,7 +39,8 @@ function login() {
             .then(data => {
                 if (data.status) {
                     console.log(data.status);
-                    Handler.render(); ///// ADD HERE DASHBOARD
+                    console.log("HERE");
+                    //Handler.render(); ///// ADD HERE DASHBOARD
                 } else {
                     const err = document.createElement("p");
                     err.textContent = "Incorrect username or password";

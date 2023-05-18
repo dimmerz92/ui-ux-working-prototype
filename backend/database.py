@@ -17,7 +17,7 @@ def disconnect(conn, cur):
     cur.close()
 
 def login(username, password):
-    data = {"status": False, "data": False}
+    data = {"status": 0, "data": 0}
     try:
         conn, cur = connect()
         cur.execute("""
@@ -32,7 +32,7 @@ def login(username, password):
     except Exception as e:
         log_error(e)
         disconnect(conn, cur)
-        return data
+        return -1
     
     try:
         h = hashlib.new("SHA256")
@@ -44,11 +44,29 @@ def login(username, password):
     except Exception as e:
         log_error(e)
         disconnect(conn, cur)
-        return data
+        return -1
     
     disconnect(conn, cur)
     return data
+
+def sign_up(username, email, password):
+    try:
+        h = hashlib.new("SHA256")
+        h.update((password + SALT).encode())
+        pwd = h.hexdigest()
+        conn, cur = connect()
+        cur.execute("""
+            INSERT INTO test_users ('username', 'email', 'password')
+            VALUES (%s, %s, %s)
+            """, (username, email, pwd))
+        success = cur.rowcount
+    except Exception as e:
+        log_error(e)
+        disconnect(conn, cur)
+        return -1
     
+    disconnect(conn, cur)
+    return success
     
 def get_workspaces(username):
     try:
@@ -57,7 +75,7 @@ def get_workspaces(username):
             SELECT tw.document
             FROM test_users AS tu
             LEFT JOIN test_workspaces AS tw ON tu.username = tw.username
-            WHERE username = %s
+            WHERE tu.username = %s
             """, (username,))
         data = cur.fetchall()
         if data:
@@ -69,8 +87,10 @@ def get_workspaces(username):
         log_error(e)
         disconnect(conn, cur)
         return data
+    
+    disconnect(conn, cur)
     return data
 
 def log_error(error):
     with open("backend/logs/logins.txt", "a") as f:
-        f.write(f"{datetime.datetime.now()}\t{error}\n")
+        f.write(f"{datetime.datetime.now()}\t{error}\n") 
