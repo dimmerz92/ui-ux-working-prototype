@@ -77,9 +77,7 @@ def get_workspaces(username):
             LEFT JOIN test_workspaces AS tw ON tu.username = tw.username
             WHERE tu.username = %s
             """, (username,))
-        data = cur.fetchall()
-        if data:
-            data = [item[0] for item in data]
+        data = cur.fetchone()
     except TypeError:
         disconnect(conn, cur)
         return data
@@ -87,7 +85,7 @@ def get_workspaces(username):
         log_error(e)
         disconnect(conn, cur)
         return data
-    
+    (data,) = data
     disconnect(conn, cur)
     return data
 
