@@ -1,0 +1,60 @@
+#dash-search {
+    text-align: center;
+    margin: 1em;
+}
+
+#dash-search > input {
+    width: 30%;
+}
+
+#dash-chart {
+    height: 30vh;
+    margin: 1em;
+}
+
+#dash-workspaces {
+    margin: 1em;
+}
+
+#bench {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: var(--darkGrey);
+    border-radius: 0.5em;
+}
+
+.card {
+    background-color: var(--niceGrey);
+    border-radius: 0.5em;
+    height: 7em;
+    width: 20%;
+    padding: 1em;
+    margin: 0.5em;
+}
+
+.card > a, .card > a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.card:hover {
+    background-color: #efefef;
+}
+
+#dash-add-workspace {
+    text-align: center;
+}
+
+#big-plus {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.card-title {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    margin: 0;
+}
