@@ -3,6 +3,7 @@ import SessionManager from './SessionManager';
 import landing from '../pages/landing.js';
 import progress from '../pages/progress';
 import login from '../pages/login';
+import dashboard from '../pages/dashboard';
 
 class Handler {
     constructor() {
