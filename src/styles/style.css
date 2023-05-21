@@ -60,6 +60,10 @@ main {
     margin: 0;
 }
 
+h1 {
+    text-align: center;
+}
+
 h2 {
     margin: 0;
 }
@@ -70,4 +74,84 @@ footer {
     background-color: var(--darkBlue);
     color: var(--niceGrey);
     height: 30px;
+}
+
+.bench {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    background-color: var(--darkGrey);
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+.card {
+    background-color: var(--niceGrey);
+    border-radius: 0.5em;
+    height: 7em;
+    padding: 1em;
+}
+
+.card > a, .card > a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.card:hover {
+    background-color: #efefef;
+}
+
+.addNew {
+    text-align: center;
+}
+
+.big-plus {
+
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.card-title {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    margin: 0;
+}
+
+.popup-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    height: 2em;
+}
+
+.popup-buttons-create {
+    background-color: var(--buttonBlue);
+    color: white;
+    border: none;
+    border-radius: 0.25em;
+}
+
+.popup-buttons-create:hover {
+    filter: brightness(120%);
+}
+
+.popup-buttons-create:active {
+    filter: brightness(80%);
+}
+
+.popup-buttons-cancel {
+    background-color: var(--buttonRed);
+    color: white;
+    border: none;
+    border-radius: 0.25em;
+}
+
+.popup-buttons-cancel:hover {
+    filter: brightness(120%);
+}
+
+.popup-buttons-cancel:active {
+    filter: brightness(80%);
 }

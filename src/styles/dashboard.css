@@ -16,48 +16,6 @@
     margin: 1em;
 }
 
-#bench {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1em;
-    background-color: var(--darkGrey);
-    border-radius: 0.5em;
-    padding: 1em;
-}
-
-.card {
-    background-color: var(--niceGrey);
-    border-radius: 0.5em;
-    height: 7em;
-    padding: 1em;
-}
-
-.card > a, .card > a:visited {
-    text-decoration: none;
-    color: black;
-}
-
-.card:hover {
-    background-color: #efefef;
-}
-
-#dash-add-workspace {
-    text-align: center;
-}
-
-#big-plus {
-    font-size: 3em;
-    font-weight: bold;
-    margin: 0;
-}
-
-.card-title {
-    text-align: center;
-    font-size: large;
-    font-weight: bold;
-    margin: 0;
-}
-
 #add-workspace-popup {
     position: fixed;
     top: 35vh;
@@ -83,41 +41,4 @@
 #add-workspace-popup > textarea {
     flex-grow: 1;
     resize: none;
-}
-
-#new-workspace-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
-    height: 2em;
-}
-
-#workspace-create {
-    background-color: var(--buttonBlue);
-    color: white;
-    border: none;
-    border-radius: 0.25em;
-}
-
-#workspace-create:hover {
-    filter: brightness(120%);
-}
-
-#workspace-create:active {
-    filter: brightness(80%);
-}
-
-#workspace-cancel {
-    background-color: var(--buttonRed);
-    color: white;
-    border: none;
-    border-radius: 0.25em;
-}
-
-#workspace-cancel:hover {
-    filter: brightness(120%);
-}
-
-#workspace-cancel:active {
-    filter: brightness(80%);
 }

@@ -1,5 +1,6 @@
 import AssetManager from "../classes/AssetManager";
 import Render from "../classes/Render";
+import workspace from "./workspace";
 
 function dashboard(sessionManager, workspacesJSON) {
     // landing page wrapper
@@ -50,10 +51,25 @@ function dashboard(sessionManager, workspacesJSON) {
     h2.textContent = "Workspaces";
     workspaces.appendChild(h2);
     const bench = document.createElement("div");
-    bench.id = "bench";
+    bench.id = "workspacesBench";
+    bench.classList.add("bench");
     if (workspacesJSON) {
         const cards = AssetManager.buildWorkspaceCards(workspacesJSON);
         for (let i = 0; i < cards.length; i++) {
+            cards[i].childNodes[0].addEventListener("click", () => {
+                fetch("/get-workspace", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        "username": sessionManager.username,
+                        "name": cards[i].id
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    Render.render(workspace(sessionManager, cards[i].id, data));
+                })
+            });
             bench.appendChild(cards[i]);
         }
     }
@@ -61,7 +77,7 @@ function dashboard(sessionManager, workspacesJSON) {
     // add new workspace
     const newCard = document.createElement("div");
     newCard.id = "dash-add-workspace";
-    newCard.classList.add("card");
+    newCard.classList.add("card","addNew");
     const linkAction = document.createElement("a");
     linkAction.href = "javascript:void(0);";
     linkAction.addEventListener("click", () => {
@@ -81,8 +97,10 @@ function dashboard(sessionManager, workspacesJSON) {
         popup.appendChild(desc);
         const buttons = document.createElement("div");
         buttons.id = "new-workspace-buttons";
+        buttons.classList.add("popup-buttons");
         const create = document.createElement("button");
         create.id = "workspace-create";
+        create.classList.add("popup-buttons-create");
         create.textContent = "Create Workspace";
         create.onclick = function() {
             const title = document.getElementById("new-workspace-title");
@@ -96,7 +114,7 @@ function dashboard(sessionManager, workspacesJSON) {
             if (title.value && desc.value) {
                 fetch("/add-workspace", {
                     method: "POST",
-                    headers: {"Content-Typer": "application/json"},
+                    headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({
                         "username": sessionManager.username,
                         "document": {title: title.value, description: desc.value}
@@ -104,7 +122,27 @@ function dashboard(sessionManager, workspacesJSON) {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    AssetManager.addWorkspace(data);
+                    const cards = AssetManager.buildWorkspaceCards(data);
+                    Render.append(addNew, "dash-workspaces", "id");
+                    Render.removeChildren("workspacesBench");
+                    for (let i = 0; i < cards.length; i++) {
+                        cards[i].childNodes[0].addEventListener("click", e => {
+                            fetch("/get-workspace", {
+                                method: "POST",
+                                headers: {"Content-Type": "application/json"},
+                                body: JSON.stringify({
+                                    "username": sessionManager.username,
+                                    "name": e.target.id
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                Render.render(workspace(sessionManager, e.target.id, data));
+                            })
+                        })
+                        Render.append(cards[i], "workspacesBench", "id");
+                    }
+                    Render.append(addNew, "workspacesBench", "id", false);
                     Render.remove("add-workspace-popup");
                 });
             }
@@ -112,6 +150,7 @@ function dashboard(sessionManager, workspacesJSON) {
         buttons.appendChild(create);
         const cancel = document.createElement("button");
         cancel.id = "workspace-cancel";
+        cancel.classList.add("popup-buttons-cancel");
         cancel.textContent = "Cancel";
         cancel.onclick = function() {
             Render.remove("add-workspace-popup");
@@ -123,7 +162,7 @@ function dashboard(sessionManager, workspacesJSON) {
 
     const div = document.createElement("div");
     const p1 = document.createElement("p");
-    p1.id = "big-plus";
+    p1.classList.add("big-plus");
     p1.textContent = "+";
     div.appendChild(p1);
     const p2 = document.createElement("p");
