@@ -17,20 +17,19 @@
 }
 
 #bench {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
     background-color: var(--darkGrey);
     border-radius: 0.5em;
+    padding: 1em;
 }
 
 .card {
     background-color: var(--niceGrey);
     border-radius: 0.5em;
     height: 7em;
-    width: 20%;
     padding: 1em;
-    margin: 0.5em;
 }
 
 .card > a, .card > a:visited {
