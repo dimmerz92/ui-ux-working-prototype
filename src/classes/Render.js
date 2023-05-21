@@ -23,6 +23,7 @@ class Render {
 
     static append(content, target, type=null, del=true) {
         console.log("here2")
+        console.log(content)
         if (del) {
             const exists = document.getElementById(content.id);
             if (exists) {
