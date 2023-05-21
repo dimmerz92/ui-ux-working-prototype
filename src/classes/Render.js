@@ -20,6 +20,18 @@ class Render {
         }
         target.prepend(content);
     }
+
+    static append(content, target) {
+        const exists = document.getElementById(content.id);
+        if (exists != null) {
+            document.getElementById(content.id).remove();
+        }
+        document.getElementsByTagName(target)[0].appendChild(content);
+    }
+
+    static remove(target) {
+        document.getElementById(target).remove();
+    }
 }
 
 export default Render;

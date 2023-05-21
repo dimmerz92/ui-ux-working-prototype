@@ -1,6 +1,7 @@
 import AssetManager from "../classes/AssetManager";
+import Render from "../classes/Render";
 
-function dashboard(workspacesJSON) {
+function dashboard(sessionManager, workspacesJSON) {
     // landing page wrapper
     const main = document.createElement("div")
     main.id = "dashboard-page"
@@ -56,11 +57,39 @@ function dashboard(workspacesJSON) {
             bench.appendChild(cards[i]);
         }
     }
+
+    // add new workspace
     const newCard = document.createElement("div");
     newCard.id = "dash-add-workspace";
     newCard.classList.add("card");
     const linkAction = document.createElement("a");
     linkAction.href = "javascript:void(0);";
+    linkAction.addEventListener("click", () => {
+        const popup = document.createElement("div");
+        popup.id = "add-workspace-popup";
+        const title = document.createElement("input");
+        title.id = "new-workspace-title";
+        title.type = "text";
+        title.placeholder = "Add a name for your new workspace";
+        popup.appendChild(title);
+        const desc = document.createElement("textarea");
+        desc.id = "new-workspace-desc";
+        desc.placeholder = "Give your new workspace a short description for easy identification";
+        popup.appendChild(desc);
+        const buttons = document.createElement("div");
+        buttons.id = "new-workspace-buttons";
+        const create = document.createElement("button");
+        create.id = "workspace-create";
+        create.textContent = "Create Workspace";
+        buttons.appendChild(create);
+        const cancel = document.createElement("button");
+        cancel.id = "workspace-cancel";
+        cancel.textContent = "Cancel";
+        buttons.appendChild(cancel);
+        popup.appendChild(buttons);
+        Render.append(popup, "main");
+    })
+
     const div = document.createElement("div");
     const p1 = document.createElement("p");
     p1.id = "big-plus";

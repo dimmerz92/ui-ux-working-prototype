@@ -57,3 +57,67 @@
     font-weight: bold;
     margin: 0;
 }
+
+#add-workspace-popup {
+    position: fixed;
+    top: 35vh;
+    left: 35vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border: 2px black solid;
+    border-radius: 0.5em;
+    background-color: var(--niceGrey);
+    height: 30vh;
+    width: 30vw;
+    padding: 2em;
+}
+
+#add-workspace-popup > p {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+    margin: 0;
+}
+
+#add-workspace-popup > textarea {
+    flex-grow: 1;
+    resize: none;
+}
+
+#new-workspace-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    height: 2em;
+}
+
+#workspace-create {
+    background-color: var(--buttonBlue);
+    color: white;
+    border: none;
+    border-radius: 0.25em;
+}
+
+#workspace-create:hover {
+    filter: brightness(120%);
+}
+
+#workspace-create:active {
+    filter: brightness(80%);
+}
+
+#workspace-cancel {
+    background-color: var(--buttonRed);
+    color: white;
+    border: none;
+    border-radius: 0.25em;
+}
+
+#workspace-cancel:hover {
+    filter: brightness(120%);
+}
+
+#workspace-cancel:active {
+    filter: brightness(80%);
+}

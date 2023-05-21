@@ -1,7 +1,7 @@
 import Render from "../classes/Render";
 import dashboard from "./dashboard";
 
-function login() {
+function login(sessionManager) {
     // login container
     const container = document.createElement("div");
     container.id = "login-container";
@@ -39,8 +39,8 @@ function login() {
             .then(response => response.json())
             .then(data => {
                 if (data.status) {
-                    console.log(data);
-                    Render.render(dashboard(data.dash)); ///// ADD HERE DASHBOARD
+                    sessionManager.logIn(document.getElementById("username").value);
+                    Render.render(dashboard(sessionManager, data.dash));
                 } else {
                     const err = document.createElement("p");
                     err.textContent = "Incorrect username or password";

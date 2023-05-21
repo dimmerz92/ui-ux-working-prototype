@@ -11,7 +11,7 @@ class Handler {
         this.session = new SessionManager();
     
         // render landing page
-        Render.render(login());
+        Render.render(login(this.session));
 
         // listen to the header links
         document.getElementById("home-link").addEventListener("click", () => {
@@ -39,7 +39,7 @@ class Handler {
                 this.session.logOut();
                 Render.render(landing());
             } else {
-                Render.render(login());
+                Render.render(login(this.session));
             }
         });
     }
