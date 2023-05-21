@@ -1,4 +1,4 @@
-import Render from "../classes/Render";
+import AssetManager from "../classes/AssetManager";
 
 function dashboard(workspacesJSON) {
     // landing page wrapper
@@ -39,7 +39,7 @@ function dashboard(workspacesJSON) {
                 "container_id": "dash-chart"
             });`;
         chart.appendChild(chartScript2)}
-    main.appendChild(chartScript);
+    chart.appendChild(chartScript);
     main.appendChild(chart);
 
     // workspaces
@@ -50,9 +50,11 @@ function dashboard(workspacesJSON) {
     workspaces.appendChild(h2);
     const bench = document.createElement("div");
     bench.id = "bench";
-    if (workspacesJSON.cards.length) {
-        const cards = Render.buildWorkspaceCard(workspacesJSON);
-        // Do something
+    if (workspacesJSON) {
+        const cards = AssetManager.buildWorkspaceCards(workspacesJSON);
+        for (let i = 0; i < cards.length; i++) {
+            bench.appendChild(cards[i]);
+        }
     }
     const newCard = document.createElement("div");
     newCard.id = "dash-add-workspace";

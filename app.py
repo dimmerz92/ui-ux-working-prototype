@@ -8,5 +8,4 @@ def submit_form():
     data = db.login(request.form["username"], request.form["password"])
     status = data["status"]
     dash = data["data"]
-    print(dash)
     return jsonify(status=status, dash=dash)

@@ -39,6 +39,7 @@ function login() {
             .then(response => response.json())
             .then(data => {
                 if (data.status) {
+                    console.log(data);
                     Render.render(dashboard(data.dash)); ///// ADD HERE DASHBOARD
                 } else {
                     const err = document.createElement("p");
