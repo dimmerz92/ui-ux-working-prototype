@@ -1,3 +1,5 @@
+import Render from "./Render";
+
 class AssetManager {
     static buildWorkspaceCards(workspaces) {
         const cards = [];
@@ -22,6 +24,20 @@ class AssetManager {
             }
         }
         return cards;
+    }
+
+    static addWorkspace(data) {
+        console.log(data);
+        const addNew = document.getElementById("dash-add-workspace");
+        Render.append(addNew, "dash-workspaces", "id");
+        Render.removeChildren("bench");
+        const cards = this.buildWorkspaceCards(data);
+        for (let i = 0; i < cards.length; i++) {
+            Render.append(cards[i], "bench", "id");
+        }
+        console.log("here");
+        console.log(addNew)
+        Render.append(addNew, "bench", "id", false);
     }
 }
 

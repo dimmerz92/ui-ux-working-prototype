@@ -67,6 +67,9 @@ function dashboard(sessionManager, workspacesJSON) {
     linkAction.addEventListener("click", () => {
         const popup = document.createElement("div");
         popup.id = "add-workspace-popup";
+        const header = document.createElement("p");
+        header.textContent = "New Workspace";
+        popup.appendChild(header);
         const title = document.createElement("input");
         title.id = "new-workspace-title";
         title.type = "text";
@@ -81,10 +84,38 @@ function dashboard(sessionManager, workspacesJSON) {
         const create = document.createElement("button");
         create.id = "workspace-create";
         create.textContent = "Create Workspace";
+        create.onclick = function() {
+            const title = document.getElementById("new-workspace-title");
+            const desc = document.getElementById("new-workspace-desc");
+            if (!title.value) {
+                title.classList.add("invalid");
+            }
+            if (!desc.value) {
+                desc.classList.add("invalid");
+            }
+            if (title.value && desc.value) {
+                fetch("/add-workspace", {
+                    method: "POST",
+                    headers: {"Content-Typer": "application/json"},
+                    body: JSON.stringify({
+                        "username": sessionManager.username,
+                        "document": {title: title.value, description: desc.value}
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    AssetManager.addWorkspace(data);
+                    Render.remove("add-workspace-popup");
+                });
+            }
+        }
         buttons.appendChild(create);
         const cancel = document.createElement("button");
         cancel.id = "workspace-cancel";
         cancel.textContent = "Cancel";
+        cancel.onclick = function() {
+            Render.remove("add-workspace-popup");
+        }
         buttons.appendChild(cancel);
         popup.appendChild(buttons);
         Render.append(popup, "main");

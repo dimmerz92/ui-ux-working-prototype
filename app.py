@@ -9,3 +9,11 @@ def submit_form():
     status = data["status"]
     dash = data["data"]
     return jsonify(status=status, dash=dash)
+
+@app.route("/add-workspace", methods=["POST", "GET"])
+def add_workspace():
+    data = request.get_json(force=True)
+    user = data["username"]
+    doc = data["document"]
+    data = db.add_workspace(user, doc)
+    return data

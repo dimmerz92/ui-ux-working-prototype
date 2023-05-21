@@ -1,6 +1,7 @@
 import datetime
 import psycopg2
 import hashlib
+import json
 
 DATABASE = "fundamentalysedb"
 HOST = "localhost"
@@ -86,6 +87,27 @@ def get_workspaces(username):
         disconnect(conn, cur)
         return data
     (data,) = data
+    disconnect(conn, cur)
+    return data
+
+def add_workspace(username, document):
+    print("here")
+    try:
+        print("here1")
+        conn, cur = connect()
+        print("here2")
+        cur.execute("""
+            UPDATE test_workspaces
+            SET document = jsonb_insert(document,'{cards,-1}', jsonb %s, true)
+            WHERE username = %s
+            """, (json.dumps(document), username))
+        conn.commit()
+    except Exception as e:
+        log_error(e)
+        disconnect(conn, cur)
+        return -1
+    
+    data = get_workspaces(username)
     disconnect(conn, cur)
     return data
 

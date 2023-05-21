@@ -21,16 +21,29 @@ class Render {
         target.prepend(content);
     }
 
-    static append(content, target) {
-        const exists = document.getElementById(content.id);
-        if (exists != null) {
-            document.getElementById(content.id).remove();
+    static append(content, target, type=null, del=true) {
+        console.log("here2")
+        if (del) {
+            const exists = document.getElementById(content.id);
+            if (exists) {
+                document.getElementById(content.id).remove();
+            }
         }
-        document.getElementsByTagName(target)[0].appendChild(content);
+        console.log("here4")
+        if (!type) {
+            console.log("here5")
+            document.getElementsByTagName(target)[0].appendChild(content);
+        } else if (type === "id") {
+            document.getElementById(target).appendChild(content);
+        }
     }
 
     static remove(target) {
         document.getElementById(target).remove();
+    }
+
+    static removeChildren(target) {
+        document.getElementById(target).innerHTML = "";
     }
 }
 
