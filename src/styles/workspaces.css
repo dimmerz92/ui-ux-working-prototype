@@ -1,0 +1,54 @@
+#add-company-popup, #add-analysis-popup {
+    position: fixed;
+    top: 35vh;
+    left: 35vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1em;
+    border: 2px black solid;
+    border-radius: 0.5em;
+    background-color: var(--niceGrey);
+    height: 30vh;
+    width: 30vw;
+    padding: 2em;
+}
+
+#add-company-popup > p, #add-analysis-popup > p {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+    margin: 0;
+}
+
+#analysisSelections {
+    display: flex;
+    gap: 1em;
+}
+
+#analysisSelections select {
+    flex: 1 1 0px;
+}
+
+#analysesButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+}
+
+#analysesButtons button {
+    background-color: var(--buttonBlue);
+    color: white;
+    border: none;
+    border-radius: 0.25em;
+    padding: 0.5em;
+}
+
+#analysesButtons button:hover {
+    filter: brightness(120%);
+}
+
+#analysesButtons button:active {
+    filter: brightness(80%);
+}

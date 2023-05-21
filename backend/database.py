@@ -77,6 +77,7 @@ def get_workspaces(username):
             FROM test_users AS tu
             LEFT JOIN test_workspaces AS tw ON tu.username = tw.username
             WHERE tu.username = %s
+            AND tw.name = 'workspaces'
             """, (username,))
         data = cur.fetchone()
     except TypeError:
@@ -91,11 +92,8 @@ def get_workspaces(username):
     return data
 
 def add_workspace(username, document):
-    print("here")
     try:
-        print("here1")
         conn, cur = connect()
-        print("here2")
         cur.execute("""
             UPDATE test_workspaces
             SET document = jsonb_insert(document,'{cards,-1}', jsonb %s, true)
@@ -108,6 +106,28 @@ def add_workspace(username, document):
         return -1
     
     data = get_workspaces(username)
+    disconnect(conn, cur)
+    return data
+
+def retrieve_workspace(username, title):
+    try:
+        conn, cur = connect()
+        cur.execute("""
+            SELECT document
+            FROM test_workspaces
+            WHERE username = %s
+            AND name = %s
+            """, (username, title))
+        data = cur.fetchone()
+    except TypeError:
+        disconnect(conn, cur)
+        return data
+    except Exception as e:
+        log_error(e)
+        disconnect(conn, cur)
+        return data
+    
+    (data,) = data
     disconnect(conn, cur)
     return data
 

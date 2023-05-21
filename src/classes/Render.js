@@ -22,17 +22,13 @@ class Render {
     }
 
     static append(content, target, type=null, del=true) {
-        console.log("here2")
-        console.log(content)
         if (del) {
             const exists = document.getElementById(content.id);
             if (exists) {
                 document.getElementById(content.id).remove();
             }
         }
-        console.log("here4")
         if (!type) {
-            console.log("here5")
             document.getElementsByTagName(target)[0].appendChild(content);
         } else if (type === "id") {
             document.getElementById(target).appendChild(content);

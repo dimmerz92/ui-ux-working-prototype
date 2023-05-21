@@ -17,3 +17,11 @@ def add_workspace():
     doc = data["document"]
     data = db.add_workspace(user, doc)
     return data
+
+@app.route("/get-workspace", methods=["POST", "GET"])
+def get_workspace():
+    data = request.get_json(force=True)
+    user = data["username"]
+    name = data["name"]
+    data = db.retrieve_workspace(user, name)
+    return data
