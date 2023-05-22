@@ -1,4 +1,63 @@
-#add-company-popup, #add-analysis-popup {
+#workspace-page {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 1em;
+}
+
+#workspace-page > h1 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+#workspace-left {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1;
+    grid-row: 1/-1;
+    margin-top: 1em;
+}
+
+#workspace-right {
+    display: flex;
+    flex-direction: column;
+    grid-column: 3;
+    grid-row: 1/-1;
+    margin-top: 1em;
+}
+
+.workspace-button {
+    height: 2em;
+    color: white;
+    border: none;
+    border-radius: 0.25em;
+}
+
+.workspace-button:hover {
+    filter: brightness(120%);
+}
+
+.workspace-button:active {
+    filter: brightness(80%);
+}
+
+.run {
+    background-color: var(--buttonGreen);
+}
+
+.delete {
+    background-color: var(--buttonRed);
+}
+
+#companies-workspace {
+    grid-column: 2;
+}
+
+#analyses-workspace {
+    grid-column: 2;
+}
+
+#dash-run-report, #add-company-popup, #add-analysis-popup {
     position: fixed;
     top: 35vh;
     left: 35vw;
@@ -14,11 +73,35 @@
     padding: 2em;
 }
 
-#add-company-popup > p, #add-analysis-popup > p {
+#dash-run-report {
+    justify-content: flex-start;
+}
+
+#dash-run-report > p, #add-company-popup > p, #add-analysis-popup > p {
     text-align: center;
     font-weight: bold;
     font-size: larger;
     margin: 0;
+}
+
+#checkboxes {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    border: 1px black solid;
+    border-radius: 0.5em;
+    padding: 0.25em;
+}
+
+#checkboxes p {
+    font-weight: bold;
+    margin: 0;
+}
+
+#checkboxes label {
+    background-color: white;
+    padding: 2px;
+    margin: 2px 0;
 }
 
 #analysisSelections {
