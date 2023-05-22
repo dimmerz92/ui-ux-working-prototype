@@ -4,7 +4,6 @@ import landing from '../pages/landing.js';
 import progress from '../pages/progress';
 import login from '../pages/login';
 import dashboard from '../pages/dashboard';
-import workspace from '../pages/workspace';
 
 class Handler {
     constructor() {
@@ -12,7 +11,7 @@ class Handler {
         this.session = new SessionManager();
     
         // render landing page
-        Render.render(workspace(this.session));
+        Render.render(landing());
 
         // listen to the header links
         document.getElementById("home-link").addEventListener("click", () => {
