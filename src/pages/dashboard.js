@@ -62,7 +62,7 @@ function dashboard(sessionManager, workspacesJSON) {
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({
                         "username": sessionManager.username,
-                        "name": cards[i].id
+                        "name": cards[i].childNodes[0].id
                     })
                 })
                 .then(response => response.json())
@@ -123,26 +123,26 @@ function dashboard(sessionManager, workspacesJSON) {
                 .then(response => response.json())
                 .then(data => {
                     const cards = AssetManager.buildWorkspaceCards(data);
-                    Render.append(addNew, "dash-workspaces", "id");
+                    Render.append(newCard, "dash-workspaces", "id");
                     Render.removeChildren("workspacesBench");
                     for (let i = 0; i < cards.length; i++) {
-                        cards[i].childNodes[0].addEventListener("click", e => {
+                        cards[i].childNodes[0].addEventListener("click", () => {
                             fetch("/get-workspace", {
                                 method: "POST",
                                 headers: {"Content-Type": "application/json"},
                                 body: JSON.stringify({
                                     "username": sessionManager.username,
-                                    "name": e.target.id
+                                    "name": cards[i].childNodes[0].id
                                 })
                             })
                             .then(response => response.json())
                             .then(data => {
-                                Render.render(workspace(sessionManager, e.target.id, data));
+                                Render.render(workspace(sessionManager, cards[i].childNodes[0].id, data));
                             })
                         })
                         Render.append(cards[i], "workspacesBench", "id");
                     }
-                    Render.append(addNew, "workspacesBench", "id", false);
+                    Render.append(newCard, "workspacesBench", "id", false);
                     Render.remove("add-workspace-popup");
                 });
             }

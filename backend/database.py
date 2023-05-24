@@ -110,6 +110,7 @@ def add_workspace(username, document):
     return data
 
 def retrieve_workspace(username, title):
+    print(username, title)
     try:
         conn, cur = connect()
         cur.execute("""

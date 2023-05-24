@@ -21,6 +21,7 @@ def add_workspace():
 @app.route("/get-workspace", methods=["POST", "GET"])
 def get_workspace():
     data = request.get_json(force=True)
+    print(data)
     user = data["username"]
     name = data["name"]
     data = db.retrieve_workspace(user, name)

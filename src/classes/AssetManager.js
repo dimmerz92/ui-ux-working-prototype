@@ -4,10 +4,10 @@ class AssetManager {
         if (workspaces.cards.length) {
             for (let i = 0; i < workspaces.cards.length; i++) {
                 const card = document.createElement("div");
-                card.id = workspaces.cards[i].title;
                 card.classList.add("card");
                 const a = document.createElement("a");
                 a.href = "javascript:void(0);";
+                a.id = workspaces.cards[i].title;
                 const div = document.createElement("div");
                 const title = document.createElement("p");
                 title.classList.add("card-title");
